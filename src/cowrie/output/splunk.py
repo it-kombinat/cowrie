@@ -9,7 +9,8 @@ JSON log file is still recommended way to go
 from __future__ import absolute_import, division
 
 import json
-from StringIO import StringIO
+#from StringIO import StringIO
+from io import io.StringIO
 
 from twisted.internet import reactor
 from twisted.internet.ssl import ClientContextFactory
@@ -86,6 +87,7 @@ class Output(cowrie.core.output.Output):
             'Content-Type': ["application/json"]
         })
         body = FileBodyProducer(StringIO(json.dumps(entry)))
+        body = FileBodyProducer(io.StringIO(json.dumps(entry)))
         d = self.agent.request('POST', self.url, headers, body)
 
         def cbBody(body):
